@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Grocery List</title>
+</head>
+<body>
+    <nav class="green lighten-4">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo left">Grocery List</a>
+            <ul class="right">
+                <li><input class="white" id="Search" type="text" placeholder="Search">
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <div class="container">
+        <div class="row">
+            <form class="col s8 offset-s2" id="grocery-form">
+                <div class="row">
+                    <div class="col s10 input-field">
+                        <i class="material-icons prefix">local_grocery_store</i>
+                        <input type="text" id="grocery-item">
+                        <label for="grocery-item">Grocery Item</label>
+                    </div>
+                    <div class="col s2 input-field">
+                        <input id="submit" type="submit" class="btn btn-block green lighten-4">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <ul class="collection" id="grocery-list"></ul>
+            </div>
+        </div>
+    </div>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
