@@ -3,11 +3,16 @@ const input = document.querySelector('#grocery-item');
 const form = document.querySelector('#grocery-form');
 const submit = document.querySelector('#submit');
 const groceryList = document.querySelector('#grocery-list');
+const clear = document.querySelector('#clear');
+const search = document.querySelector('#search');
 
 loadAllEventListeners();
 
 function loadAllEventListeners(){
     form.addEventListener('submit', addGroceryItem);
+    groceryList.addEventListener('click', deleteGroceryItem);
+    search.addEventListener('keyup', filterGroceryList);
+    clear.addEventListener('click', clearAllGroceryListItems);
 }
 
 function addGroceryItem(e){
@@ -28,6 +33,26 @@ function addGroceryItem(e){
         groceryList.appendChild(li);
         //Clear Text Value
         input.value = '';
-        e.preventDefault();
     }
+    e.preventDefault();
+}
+function deleteGroceryItem(e){
+    if(e.target.parentElement.classList.contains('delete')){
+        e.target.parentElement.parentElement.remove();
+    }
+}
+function filterGroceryList(e){
+    const text = e.target.value.toLowerCase();
+    document.querySelectorAll('.collection-item').forEach(function(task){
+        const item = task.firstChild.textContent;
+        if(item.toLowerCase().indexOf(text) != -1){
+            task.style.display = 'block';
+        }else{
+            task.style.display = 'none';
+        }
+
+    });
+}
+function clearAllGroceryListItems(){
+    groceryList.textContent = '';
 }
