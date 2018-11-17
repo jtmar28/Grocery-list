@@ -23,7 +23,7 @@ function StoreGroceryItemsIntoLS(item){
         items = JSON.parse(localStorage.getItem('items'));
     }
     items.push(item);
-    localStorage.setItem('items', JSON.stringify(items));
+    localStorage.setItem('items',JSON.stringify(items));
 }
 function getGroceryItemsFromLS(){
     let items;
@@ -41,7 +41,7 @@ function getGroceryItemsFromLS(){
         //Create delete button
         const link = document.createElement('a');
         link.className = 'delete secondary-content';
-        link.innerHTML = '<i class="material-icons prefix">delete</i>';
+        link.innerHTML = '<i class="fas fa-trash"></i>';
         li.appendChild(link);
         groceryList.appendChild(li);
     });
@@ -59,7 +59,7 @@ function addGroceryItem(e){
         //Create delete button
         const link = document.createElement('a');
         link.className = 'delete secondary-content';
-        link.innerHTML = '<i class="material-icons prefix">delete</i>';
+        link.innerHTML = '';
         li.appendChild(link);
         groceryList.appendChild(li);
         //Store into ls
@@ -72,22 +72,41 @@ function addGroceryItem(e){
 function deleteGroceryItem(e){
     if(e.target.parentElement.classList.contains('delete')){
         e.target.parentElement.parentElement.remove();
+        deleteGroceryItemFromLS(e.target.parentElement.parentElement);
     }
 }
-function deleteGroceryItemFromLS(){
+function deleteGroceryItemFromLS(groceryItem){
+    let items;
+    if(localStorage.getItem('items') === null){
+        items = [];
+    }else{
+        items = JSON.parse(localStorage.getItem('items'));
+    }
+    items.forEach(function(item,index){
+        if(groceryItem.textContent === item){
+            items.splice(index,1);
+        }
+    });
+    console.log(groceryItem.textContent);
+    localStorage.setItem('items',JSON.stringify(items));
 
 }
 function filterGroceryList(e){
     const text = e.target.value.toLowerCase();
-    document.querySelectorAll('.collection-item').forEach(function(item){
-        const items = item.firstChild.textContent;
-        if(items.toLowerCase().indexOf(text) != -1){
-            item.style.display = 'block';
+    document.querySelectorAll('.collection-item').forEach(function(items){
+        const item = items.firstChild.textContent;
+        if(item.toLowerCase().indexOf(text) != -1){
+            items.style.display = 'block';
         }else{
-            item.style.display = 'none';
+            items.style.display = 'none';
         }
     });
 }
+function clearGroceryItemsFromLS(){
+    localStorage.clear();
+}
 function clearAllGroceryListItems(){
     groceryList.textContent = '';
+    clearGroceryItemsFromLS();
 }
+
